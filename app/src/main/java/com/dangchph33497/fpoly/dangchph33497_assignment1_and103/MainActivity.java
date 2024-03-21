@@ -42,12 +42,9 @@ public class MainActivity extends AppCompatActivity {
         });
         fab = findViewById(R.id.fab);
         lvMain = findViewById(R.id.listviewMain);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,AddCar.class);
-                startActivity(intent);
-            }
+        fab.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,AddCar.class);
+            startActivity(intent);
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -65,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Car>> call, Response<List<Car>> response) {
                 if(response.isSuccessful()){
                     carList = response.body();
-                    carAdapter = new CarAdapter(carList,MainActivity.this);
+                    ApiService apiService = RetrofitClientInstance.getRetrofitInstance().create(ApiService.class);
+                    carAdapter = new CarAdapter(carList,apiService,MainActivity.this);
                     lvMain.setAdapter(carAdapter);
                 }
             }
