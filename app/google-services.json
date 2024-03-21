@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "39138092388",
+    "project_id": "assignment1-ceb18",
+    "storage_bucket": "assignment1-ceb18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39138092388:android:c28265d2c58429d3a4c671",
+        "android_client_info": {
+          "package_name": "com.dangchph33497.fpoly.dangchph33497_assignment1_and103"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2p6u-h5ZxZLEqZOYCrL928mcuWFxMyv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
