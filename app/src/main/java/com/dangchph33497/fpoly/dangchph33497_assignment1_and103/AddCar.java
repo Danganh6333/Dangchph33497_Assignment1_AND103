@@ -56,7 +56,10 @@ public class AddCar extends AppCompatActivity {
         String tenXe = edtTenXe.getText().toString();
         int gia = Integer.parseInt(edtGia.getText().toString());
         String loaiXe = edtLoai.getText().toString();
-
+        if (!loaiXe.equals("Ô tô") && !loaiXe.equals("Xe máy")){
+            Toast.makeText(this, "Loại Xe phải là Ô tô hoặc Xe máy", Toast.LENGTH_SHORT).show();
+            return;
+        }
         CarWithoutImage car = new CarWithoutImage(tenXe, gia, loaiXe);
 
         Call<Response<Car>> call = apiService.addCar(car);
