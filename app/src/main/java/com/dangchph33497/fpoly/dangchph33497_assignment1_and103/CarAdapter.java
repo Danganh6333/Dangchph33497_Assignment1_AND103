@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dangchph33497.fpoly.dangchph33497_assignment1_and103.Model.ApiService;
 import com.dangchph33497.fpoly.dangchph33497_assignment1_and103.Model.Car;
-import com.dangchph33497.fpoly.dangchph33497_assignment1_and103.Model.CarUpdate;
+import com.dangchph33497.fpoly.dangchph33497_assignment1_and103.Model.CarWithoutImage;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -33,7 +33,7 @@ import retrofit2.Response;
 
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolderOfCars> {
 
-    private List<Car> carList;
+    public List<Car> carList;
     private ApiService apiService;
     private Context context;
 
@@ -57,7 +57,11 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolderOfCars
         holder.tvGiaXe.setText(String.valueOf(carList.get(position).getGia()));
         holder.tvLoaiXe.setText(carList.get(position).getLoaiXe());
         String imageUrl = ApiService.DOMAIN + carList.get(position).getAnh();
-        Picasso.get().load(imageUrl).into(holder.imgAvatar);
+        if (carList.get(position).getAnh() != null && !carList.get(position).getAnh().isEmpty()) {
+            Picasso.get().load(imageUrl).into(holder.imgAvatar);
+        } else {
+            holder.imgAvatar.setImageResource(R.drawable.warning);
+        }
         holder.btnXoa.setOnClickListener(v -> {
             int position1 = holder.getBindingAdapterPosition();
             if (position1 != RecyclerView.NO_POSITION) {
@@ -156,12 +160,12 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolderOfCars
                     Toast.makeText(context, "Mời không để trống trường dữ liệu", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                CarUpdate carUpdateRequest = new CarUpdate(
+                CarWithoutImage carWithoutImageRequest = new CarWithoutImage(
                         tenXe,
                         gia,
                         loaiXe
                 );
-                Call<Response<Car>> call = apiService.updateCarById(carList.get(position).getId(), carUpdateRequest);
+                Call<Response<Car>> call = apiService.updateCarById(carList.get(position).getId(), carWithoutImageRequest);
 
                 call.enqueue(new Callback<Response<Car>>() {
                     @Override

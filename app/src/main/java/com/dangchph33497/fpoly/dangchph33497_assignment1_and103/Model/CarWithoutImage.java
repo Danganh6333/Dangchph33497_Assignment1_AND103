@@ -1,14 +1,14 @@
 package com.dangchph33497.fpoly.dangchph33497_assignment1_and103.Model;
 
-public class CarUpdate {
+public class CarWithoutImage {
     private String tenXe;
     private int gia;
     private String loaiXe;
 
-    public CarUpdate() {
+    public CarWithoutImage() {
     }
 
-    public CarUpdate(String tenXe, int gia, String loaiXe) {
+    public CarWithoutImage(String tenXe, int gia, String loaiXe) {
         this.tenXe = tenXe;
         this.gia = gia;
         this.loaiXe = loaiXe;

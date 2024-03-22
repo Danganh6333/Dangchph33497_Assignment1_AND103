@@ -54,6 +54,19 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View v) {
                 String email = edtUsername.getText().toString();
                 String password = edtPassword.getText().toString();
+                String rePassword = edtConfirm.getText().toString();
+                if(!password.equals(rePassword)){
+                    Toast.makeText(SignUp.this, "Mật khẩu phải trùng nhau", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (password.length() < 6) {
+                    Toast.makeText(SignUp.this, "Mật khẩu phải chứa ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!isValidEmail(email)) {
+                    Toast.makeText(SignUp.this, "Vui lòng nhập địa chỉ email hợp lệ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -79,5 +92,10 @@ public class SignUp extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+    private boolean isValidEmail(String email) {
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        return email.matches(emailPattern);
     }
 }

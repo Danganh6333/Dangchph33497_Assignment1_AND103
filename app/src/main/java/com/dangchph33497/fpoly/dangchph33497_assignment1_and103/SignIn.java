@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SignIn extends AppCompatActivity {
-    AppCompatEditText edtPassword,edtUsername;
+    AppCompatEditText edtPassword,edtUsername,edtConfirm;
     CheckBox chkLuu;
     Button btnSignIn,btnSignUp;
     private FirebaseAuth mAuth;
@@ -52,6 +52,7 @@ public class SignIn extends AppCompatActivity {
         chkLuu = findViewById(R.id.chkLuu);
         btnSignIn = findViewById(R.id.btnSignIn);
         btnSignUp = findViewById(R.id.btnSignUp);
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +66,7 @@ public class SignIn extends AppCompatActivity {
                 mAuth = FirebaseAuth.getInstance();
                 String email = edtUsername.getText().toString();
                 String password = edtPassword.getText().toString();
+
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(SignIn.this, new OnCompleteListener<AuthResult>() {
                             @Override
